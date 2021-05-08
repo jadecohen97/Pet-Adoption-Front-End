@@ -7,7 +7,6 @@ const CreatedPet = ({ targetPetId }) => {
   const auth = useAuth();
   const petsId = targetPetId;
   const [petData, setPet] = useState("");
-
   useEffect(() => {
     getPetById(petsId).then((data) => {
       setPet(data);

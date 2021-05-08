@@ -64,6 +64,7 @@ function AddPet() {
   return (
     <div>
       <form onSubmit={addNewPet} className="AddPetPage">
+        <h3>ADD A NEW PET!</h3>
         <input
           className="inputField"
           type="text"
