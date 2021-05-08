@@ -4,7 +4,6 @@ import localforage from "localforage";
 export const AuthContext = createContext({
   isInitiallyLoaded: false,
   token: "",
-  // userId: '',
   saveToken: async (token) => {},
   removeToken: async () => {},
 });
@@ -18,10 +17,6 @@ export const useAuth = () => {
 const AuthProvider = (props) => {
   const [isInitiallyLoaded, setIsInitiallyLoaded] = useState(false);
   const [token, setToken] = useState("");
-
-  // const authToken = token && token.data ? token.data.token : token;
-  console.log("token", token);
-
   const saveToken = async (token) => {
     setToken(token);
     await localforage.setItem(tokenKey, token.data.token);

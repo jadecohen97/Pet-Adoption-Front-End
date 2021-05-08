@@ -28,8 +28,6 @@ const Login = ({ isOpen, setModalIsOpen, setName }) => {
         throw "incorrect";
       }
     }
-
-    document.location.reload();
   };
 
   return (

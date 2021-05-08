@@ -16,8 +16,10 @@ const UserSettings = () => {
     password_hash: "",
   });
   useEffect(() => {
-    getUserInfo(userId, auth.token).then((data) => {
+    const authToken = auth.token.data ? auth.token.data.token : auth.token;
+    getUserInfo(userId, authToken).then((data) => {
       setUserInfo(data[0]);
+      console.log(authToken);
     });
   }, []);
 

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { addThePet } from "../Lib/api";
 import { useAuth } from "../context/auth";
 import { useHistory } from "react-router-dom";
-import { useParams } from "react-router-dom";
 import { putPetImage } from "../Lib/api";
 import { v4 as uuidv4 } from "uuid";
 
@@ -10,7 +9,6 @@ function AddPet() {
   const auth = useAuth();
   const history = useHistory();
   const [picture_url, setPicture_url] = useState("");
-
   const [addPet, setAddPet] = useState({
     id: "",
     type: "",
@@ -35,11 +33,12 @@ function AddPet() {
   }
 
   const addNewPet = async (event) => {
+    const authToken = auth.token.data ? auth.token.data.token : auth.token;
     event.preventDefault();
     const formData = new FormData();
     formData.append("image", picture_url);
     const id = uuidv4();
-    const picture = await putPetImage(id, formData, auth.token);
+    const picture = await putPetImage(id, formData, authToken);
     setAddPet({
       id: "",
       type: "",
@@ -57,9 +56,9 @@ function AddPet() {
 
     addPet.id = id;
     addPet.image = picture;
-    const petAdded = await addThePet(addPet, auth.token);
-    alert("pet added successfully, well done m8");
-    history.push(`/pet/${petAdded.pets.id}`);
+    const petAdded = await addThePet(addPet, authToken);
+    alert("pet added successfully");
+    history.push(`/`);
   };
 
   return (

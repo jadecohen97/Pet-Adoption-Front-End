@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import Login from "./Login";
 import SignUp from "./SignUp";
 import Modal from "react-modal";
-import Search from "./Search";
-import { useHistory } from "react-router-dom";
 import { useAuth } from "../context/auth";
 import localforage from "localforage";
 
@@ -15,7 +13,6 @@ const NavBar = () => {
   const [modalIsOpenSign, setIsOpenSign] = useState(false);
   const [name, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   const onOpenModal = () => {
     setModalIsOpen(!modalIsOpen);
@@ -44,15 +41,13 @@ const NavBar = () => {
   const auth = useAuth();
 
   const logoutUser = (token) => {
-    // setIsLoggedIn(false);
     auth.removeToken(token);
-    console.log(isLoggedIn, "isLoggedIn");
-    // const getName = localforage.removeItem("Name").then((data) => {
-    //   setName(data);
-    // });
-    // const getLastname = localforage.removeItem("LastName").then((data) => {
-    //   setLastName(data);
-    // });
+    const removeName = localforage.removeItem("Name").then((name) => {
+      setFirstName("");
+    });
+    const removeLastNight = localforage.removeItem("LastName").then((lastName) => {
+      setLastName("");
+    });
   };
 
   return (
@@ -72,8 +67,6 @@ const NavBar = () => {
           </div>
         </div>
         <div className="rightNav">
-          {/* <div> */}
-
           {auth.token ? (
             <span>
               <Link to="/UserSettings">
@@ -87,27 +80,16 @@ const NavBar = () => {
           ) : (
             <span>
               <button className="navBtns" onClick={onOpenModal}>
-                LOGIN
+                LOGIN 
               </button>
-
+                  |
               <button className="navBtns" onClick={onOpenModalSign}>
                 SIGNUP
               </button>
             </span>
           )}
-          {/* {!isLoggedIn && ( */}
-          {/* <button className="navBtns" onClick={onOpenModalSign}>
-            SIGNUP
-          </button> */}
-          {/* )} */}
-          {/* {isLoggedIn && (
-          <button className="navBtns" onClick={logoutUser}>
-            LOGOUT
-          </button>
-          )} */}
         </div>
       </div>
-
       <Login
         isOpen={modalIsOpen}
         setModalIsOpen={setModalIsOpen}

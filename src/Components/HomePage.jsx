@@ -19,10 +19,9 @@ function HomePage(){
             </div>
            
             <div className="btmPage">
-           <div>how it works</div>
-           <div>SIGN UP / LOGIN OR GET STRAIGHT TO SEARCHING</div>
-            <div>your best friend is waiting, ready to find him/her?</div>
-            <div>find your new best pal here </div>
+           <div></div>
+           <h1>SIGN UP | LOGIN | START SEARCHING TO FIND YOUR PERFECT PET</h1>
+            <h3>your best friend is waiting, ready to find him/her?</h3>
             </div>
            
            

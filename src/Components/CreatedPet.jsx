@@ -21,18 +21,18 @@ const CreatedPet = ({ targetPetId }) => {
   return (
     <div>
       <p>{petData.name}</p>
-      <p>{petData.type}</p>
+      <p>type: {petData.type}</p>
       <img src={petData.picture_url} width="100" height="100" alt=""></img>
       <p>adoption status: {petData.adoption_Status}</p>
       <p>{petData.bio}</p>
       <p>{petData.breed}</p>
       <p>{petData.color}</p>
-      <p>{petData.dietary_restrictions}</p>
-      <p>{petData.height}</p>
-      <p>{petData.weight}</p>
-      <p>{petData.hypoallergenic}</p>
-      <Link to={`/petPage`} className="petLink">
-        Go to pets page?
+      <p>dietary restrictions?{petData.dietary_restrictions}</p>
+      <p>height: {petData.height}</p>
+      <p>weight: {petData.weight}</p>
+      <p>hypoallergenic?{petData.hypoallergenic === 0 ? "yes" : "no"}</p>
+      <Link to={`/petPage`} className="submitBtn">
+        go to pets page?
       </Link>
     </div>
   );
