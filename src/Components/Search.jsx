@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { getPetType, getPetAdvancedSearch } from "../Lib/api";
+import { getPetType} from "../Lib/api";
 import { useAuth } from "../context/auth";
 import CreatedPet from "./CreatedPet";
 import PetPage from "./PetPage";

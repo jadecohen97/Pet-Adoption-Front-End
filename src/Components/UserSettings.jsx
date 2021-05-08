@@ -47,7 +47,7 @@ const UserSettings = () => {
   return (
     <div>
       <form className="UserProfile" onSubmit={(e) => e.preventDefault()}>
-        <h3>YOUR PROFILE</h3>
+        <h3>YOUR PROFILE, {userInfo.first_name}</h3>
         <div className="gridWrapper">
           <input
             disabled={isNotEditable}
