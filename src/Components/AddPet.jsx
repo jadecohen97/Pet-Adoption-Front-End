@@ -2,11 +2,17 @@ import React, { useState } from "react";
 import { addThePet } from "../Lib/api";
 import { useAuth } from "../context/auth";
 import { useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { putPetImage } from "../Lib/api";
+import { v4 as uuidv4 } from "uuid";
 
 function AddPet() {
   const auth = useAuth();
   const history = useHistory();
+  const [picture_url, setPicture_url] = useState("");
+
   const [addPet, setAddPet] = useState({
+    id: "",
     type: "",
     name: "",
     adoptionStatus: "",
@@ -28,19 +34,37 @@ function AddPet() {
     });
   }
 
-  const createPet = async () => {
-    const pet = await addThePet(addPet, auth.token);
-    alert("pet added successfully");
-    history.push(`/pet/${pet.pets.id}`);
-  };
-
-  function addNewPet(event) {
+  const addNewPet = async (event) => {
     event.preventDefault();
-  }
+    const formData = new FormData();
+    formData.append("image", picture_url);
+    const id = uuidv4();
+    const picture = await putPetImage(id, formData, auth.token);
+    setAddPet({
+      id: "",
+      type: "",
+      name: "",
+      adoptionStatus: "",
+      image: "",
+      height: 0,
+      weight: 0,
+      color: "",
+      bio: "",
+      hypoallergenic: false,
+      dietaryRestrictions: "",
+      breed: "",
+    });
+
+    addPet.id = id;
+    addPet.image = picture;
+    const petAdded = await addThePet(addPet, auth.token);
+    alert("pet added successfully, well done m8");
+    history.push(`/pet/${petAdded.pets.id}`);
+  };
 
   return (
     <div>
-      <form onSubmit={(event) => addNewPet(event)} className="UserProfile">
+      <form onSubmit={addNewPet} className="AddPetPage">
         <input
           className="inputField"
           type="text"
@@ -57,7 +81,6 @@ function AddPet() {
           onChange={handleChange}
           placeholder="name"
         />
-
         <select
           className="inputField"
           name="adoptionStatus"
@@ -72,9 +95,8 @@ function AddPet() {
         <input
           className="inputField"
           type="file"
-          value={addPet.image}
-          name="image"
-          onChange={handleChange}
+          name="picture"
+          onChange={(event) => setPicture_url(event.target.files[0])}
           placeholder="add pet image"
         />
         <input
@@ -136,9 +158,7 @@ function AddPet() {
           onChange={handleChange}
         />
 
-        <button type="submit" className="submitBtn" onClick={createPet}>
-          Add Pet
-        </button>
+        <button className="submitBtn">Add Pet</button>
       </form>
     </div>
   );

@@ -1,5 +1,5 @@
 .backgroundIMG {
-  background-image: url("icons/IMG_6595.JPG");
+  background-image: url("./icons/IMG_6595.JPG");
   background-repeat: no-repeat;
   background-size: cover;
   opacity: 0.8;
@@ -188,34 +188,77 @@ textarea {
   border: none;
 } */
 
-.petDisplay{
+.petDisplay {
   margin-top: 30vh;
 }
 
-.petPage{
-  margin-top: 8vh;
+.petPage {
+  margin-top: 7vh;
   display: grid;
   grid-template-columns: 300px 300px 300px;
   grid-gap: 50px;
   justify-content: center;
   align-items: center;
   height: fit-content;
-  background-color: #5c5c5c;
+  background-color: #d8d2d2;
 }
-.petLink{
+.petLink {
   color: rgb(219, 152, 152);
 }
 
-.petList{
+.petList {
   list-style: none;
   display: contents;
   /* display: grid; */
 }
 
-.card{
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); 
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   padding: 16px;
   text-align: center;
-  background-color: #f1f1f1;
-  
+  background-color: #ffe8e8;
+}
+
+.noPetsText {
+  margin-top: 20vh;
+}
+
+#savedPets {
+  color: rgb(233, 136, 136);
+}
+
+.petImgs {
+  object-fit: contain;
+  height: 287px;
+  width: 273px;
+}
+
+.AddPetPage {
+  margin-top: 10vh;
+  display: grid;
+  grid-template-columns: 300px 300px 300px;
+  grid-gap: 50px;
+  justify-content: center;
+  align-items: center;
+  height: fit-content;
+  background-color: #ffe9e9;
+}
+
+.searchBar {
+  width: 30%;
+  align-items: center;
+  height: 50px;
+  margin-top: 12vh;
+}
+.searchPage {
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #d8d2d2;
+  align-content: center;
+  display: flex;
+}
+
+.searchBtn {
+  width: auto;
 }

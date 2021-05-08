@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { signUpUser } from "../Lib/api";
-// import { useHistory } from "react-router-dom";
+import Modal from "react-modal";
 
-function SignUp() {
-  // const history = useHistory();
+const SignUp = ({ isOpen, setIsOpenSign }) => {
   const [userInfo, setUserInfo] = useState({
     firstName: "",
     lastName: "",
@@ -12,7 +11,11 @@ function SignUp() {
     password: "",
     confirmPassword: "",
   });
+  const [failedMessage, setFailedMessage] = useState("");
 
+  function resetFailedMsg() {
+    setFailedMessage("");
+  }
   function handleChange(event) {
     const value = event.target.value;
     setUserInfo({
@@ -21,24 +24,30 @@ function SignUp() {
     });
   }
 
-  const register = () => {
+  const SignUpUser = async (event) => {
+    event.preventDefault();
     if (userInfo.password !== userInfo.confirmPassword) {
-      alert("Passwords don't match");
+      setIsOpenSign(true);
+      setFailedMessage("Passwords don't match!");
     } else {
-      signUpUser(userInfo);
-      alert(`Welcome ${userInfo.firstName}`);
-      // alert("Welcome! Please login?");
-      // history.push(`/signup/login`);
+      try {
+        await signUpUser(userInfo);
+        setFailedMessage("");
+      } catch (err) {
+        setFailedMessage(
+          "oops.. we had a problem signing you in. check your credentials"
+        );
+      }
     }
   };
 
-  function SignUpUser(event) {
-    event.preventDefault();
-  }
-
   return (
-    <div>
+    <Modal className="modal" isOpen={isOpen}>
+      <button className="closeModal" onClick={() => setIsOpenSign(false)}>
+        x
+      </button>
       <form onSubmit={(event) => SignUpUser(event)} className="loginContainer">
+        <div>{failedMessage}</div>
         <h3>SIGN UP!</h3>
         <input
           className="inputField"
@@ -47,6 +56,7 @@ function SignUp() {
           name="firstName"
           onChange={handleChange}
           placeholder="first name"
+          onFocus={resetFailedMsg}
         />
         <input
           className="inputField"
@@ -55,8 +65,10 @@ function SignUp() {
           name="lastName"
           onChange={handleChange}
           placeholder="last name"
+          onFocus={resetFailedMsg}
         />
         <input
+          onFocus={resetFailedMsg}
           className="inputField"
           type="email"
           value={userInfo.email}
@@ -65,6 +77,7 @@ function SignUp() {
           placeholder="email"
         />
         <input
+          onFocus={resetFailedMsg}
           className="inputField"
           type="tel"
           value={userInfo.phoneNo}
@@ -73,6 +86,7 @@ function SignUp() {
           placeholder="phone number"
         />
         <input
+          onFocus={resetFailedMsg}
           className="inputField"
           type="password"
           value={userInfo.password}
@@ -81,6 +95,7 @@ function SignUp() {
           placeholder="password"
         />
         <input
+          onFocus={resetFailedMsg}
           className="inputField"
           type="password"
           value={userInfo.confirmPassword}
@@ -88,17 +103,10 @@ function SignUp() {
           placeholder="confirm password"
           onChange={handleChange}
         />
-        <button
-          type="submit"
-          className="submitBtn"
-          onClick={register}
-          // disabled=
-        >
-          SIGN UP
-        </button>
+        <button className="submitBtn">SIGN UP</button>
       </form>
-    </div>
+    </Modal>
   );
-}
+};
 
 export default SignUp;

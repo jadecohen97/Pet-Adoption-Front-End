@@ -1,40 +1,40 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { getPetById } from "../Lib/api";
 import { useAuth } from "../context/auth";
-import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-function CreatedPet() {
+const CreatedPet = ({ targetPetId }) => {
   const auth = useAuth();
-  const petId = useParams();
-  console.log(petId);
-  const [pet, setPet] = useState(null);
-
-
-  // navigate to petpage to see all the pets 
-  // const goToPetPage = () => {
-  //   history.push(`/pets`);
-  // };
-
+  const petsId = targetPetId;
+  const [petData, setPet] = useState("");
 
   useEffect(() => {
-    getPetById(petId, auth.token).then((data) => {
-      console.log(data.data);
-      setPet(data.data);
+    getPetById(petsId).then((data) => {
+      setPet(data);
     });
-  }, [petId, auth.token]);
-  if (!pet) {
+  }, [petsId, auth.token]);
+
+  if (!petsId) {
     return <div>no pet</div>;
   }
+
   return (
-    <div className="petDisplay">
-      <p>name: {pet.name}</p>
-      <p>{pet.picture_url}</p>
-      <img src = {pet.picture_url}></img>
-      <p>adoption status: {pet.adoption_Status}</p>
-     <Link to={`/petPage`} className="petLink">Go to pets page?</Link>
+    <div>
+      <p>{petData.name}</p>
+      <p>{petData.type}</p>
+      <img src={petData.picture_url} width="100" height="100" alt=""></img>
+      <p>adoption status: {petData.adoption_Status}</p>
+      <p>{petData.bio}</p>
+      <p>{petData.breed}</p>
+      <p>{petData.color}</p>
+      <p>{petData.dietary_restrictions}</p>
+      <p>{petData.height}</p>
+      <p>{petData.weight}</p>
+      <p>{petData.hypoallergenic}</p>
+      <Link to={`/petPage`} className="petLink">
+        Go to pets page?
+      </Link>
     </div>
   );
-}
+};
 export default CreatedPet;

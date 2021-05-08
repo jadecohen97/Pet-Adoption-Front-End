@@ -1,38 +1,52 @@
 import React, { useState } from "react";
 import { logUser } from "../Lib/api";
 import { useAuth } from "../context/auth";
+import localforage from "localforage";
+import Modal from "react-modal";
 
-const Login = () => {
+const Login = ({ isOpen, setModalIsOpen, setName }) => {
   const auth = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loginStatus, setLoginStatus] = useState("");
 
-  const formSubmit = (event) => {
+  const loginUser = async (event) => {
     event.preventDefault();
-  };
 
-  const loginUser = async (token) => {
     if (email && password) {
       try {
-        const token = await logUser(email, password);
-        console.log("login token(save token):", token.data.token);
-        auth.saveToken(token);
+        const userData = await logUser(email, password);
+        localforage.setItem("userId", userData.data.user.id);
+        auth.saveToken(userData);
+        setName({
+          firstName: userData.data.user.first_name,
+          lastName: userData.data.user.last_name,
+        });
+        setModalIsOpen(false);
       } catch (err) {
-        alert("incorrect");
+        setLoginStatus("failed");
+        throw "incorrect";
       }
     }
+
+    document.location.reload();
   };
 
   return (
-    <div>
-      <form onSubmit={formSubmit} className="loginContainer">
+    <Modal className="modal" isOpen={isOpen}>
+      <button className="closeModal" onClick={() => setModalIsOpen(false)}>
+        x
+      </button>
+      <form onSubmit={loginUser} className="loginContainer">
         <h3>LOG IN!</h3>
+        {loginStatus == "failed" && <div>Login failed!</div>}
         <input
           className="inputField"
           type="email"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
           placeholder="email"
+          onFocus={() => setLoginStatus("")}
         />
         <input
           className="inputField"
@@ -40,12 +54,11 @@ const Login = () => {
           value={password}
           onChange={(event) => setPassword(event.target.value)}
           placeholder="password"
+          onFocus={() => setLoginStatus("")}
         />
-        <button type="submit" className="submitBtn" onClick={loginUser}>
-          LOG IN
-        </button>
+        <button className="submitBtn">LOG IN</button>
       </form>
-    </div>
+    </Modal>
   );
 };
 

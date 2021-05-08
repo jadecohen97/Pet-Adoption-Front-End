@@ -13,7 +13,8 @@ import AuthProvider, { useAuth } from "./context/auth";
 import AddPet from "./Components/AddPet";
 import CreatedPet from "./Components/CreatedPet";
 import PetPage from "./Components/PetPage";
-
+import MyPets from "./Components/MyPets";
+import Search from "./Components/Search";
 // import Search from "./Components/Search";
 // const AppRouter = () => {
 //   let auth = useAuth();
@@ -29,7 +30,7 @@ function PrivateRoute({ children, ...rest }) {
         ) : (
           <Redirect
             to={{
-              pathname: "/login",
+              pathname: "/",
               state: { from: location },
             }}
           />
@@ -41,8 +42,6 @@ function PrivateRoute({ children, ...rest }) {
 
 const AppRouter = () => {
   let auth = useAuth();
-  console.log(auth);
-  console.log("app.js:", auth.token);
   if (!auth.isInitiallyLoaded) {
     return <div></div>;
   }
@@ -63,6 +62,12 @@ const AppRouter = () => {
             </PrivateRoute>
             <Route path="/PetPage">
               <PetPage />
+            </Route>
+            <PrivateRoute path="/MyPets">
+              <MyPets />
+            </PrivateRoute>
+            <Route path="/Search">
+              <Search />
             </Route>
             <PrivateRoute path="/UserSettings">
               <UserSettings />
