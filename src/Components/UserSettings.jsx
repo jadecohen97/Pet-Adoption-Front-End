@@ -19,7 +19,6 @@ const UserSettings = () => {
     const authToken = auth.token.data ? auth.token.data.token : auth.token;
     getUserInfo(userId, authToken).then((data) => {
       setUserInfo(data[0]);
-      console.log(authToken);
     });
   }, []);
 

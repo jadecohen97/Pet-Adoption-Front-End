@@ -22,7 +22,6 @@ const MyPets = () => {
   useEffect(() => {
     const authToken = auth.token.data ? auth.token.data.token : auth.token;
     getUserPets(petId, authToken).then((data) => {
-      console.log("data", data);
       setMyPets(data);
     });
     getUsersSavedPets(petId, authToken).then((data) => {

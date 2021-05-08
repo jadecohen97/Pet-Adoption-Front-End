@@ -87,7 +87,6 @@ const PetPage = () => {
 
   const renderPetsUnsaveAndSave = (pet) => {
     const index = petsSaved.indexOf(pet.id);
-
     if (petsSaved.includes(pet.id) && petsSaved[index] === pet.id) {
       return (
         <button value={pets.id} onClick={handleUnsavePet}>
@@ -116,9 +115,7 @@ const PetPage = () => {
               <div>{pet.type}</div>
               <div>{pet.breed}</div>
               <div>{pet.adoption_Status}</div>
-              <div className="petImgs">
                 <img className="petImgs" src={pet.picture_url}></img>
-              </div>
               <div>Height: {pet.height}</div>
               <div>Weight: {pet.weight}</div>
               <div>{pet.color}</div>
