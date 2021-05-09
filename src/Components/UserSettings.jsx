@@ -15,8 +15,8 @@ const UserSettings = () => {
     bio: "",
     password_hash: "",
   });
+  const authToken = auth.token.data ? auth.token.data.token : auth.token;
   useEffect(() => {
-    const authToken = auth.token.data ? auth.token.data.token : auth.token;
     getUserInfo(userId, authToken).then((data) => {
       setUserInfo(data[0]);
     });
@@ -28,7 +28,7 @@ const UserSettings = () => {
 
   const saveChanges = async () => {
     try {
-      await updateUserInfo(userId, userInfo, auth.token);
+      await updateUserInfo(userId, userInfo, authToken);
     } catch {
       return new Error();
     }

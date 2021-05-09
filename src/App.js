@@ -15,10 +15,7 @@ import CreatedPet from "./Components/CreatedPet";
 import PetPage from "./Components/PetPage";
 import MyPets from "./Components/MyPets";
 import Search from "./Components/Search";
-// import Search from "./Components/Search";
-// const AppRouter = () => {
-//   let auth = useAuth();
-// }
+
 function PrivateRoute({ children, ...rest }) {
   let auth = useAuth();
   return (
