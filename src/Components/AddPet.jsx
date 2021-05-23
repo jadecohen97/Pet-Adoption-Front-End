@@ -64,7 +64,7 @@ function AddPet() {
   return (
     <div>
       <form onSubmit={addNewPet} className="AddPetPage">
-        <h3>ADD A NEW PET!</h3>
+      <h3 className="addPetText">ADD A <br/><br/> NEW PET!</h3>
         <input
           className="inputField"
           type="text"
@@ -158,7 +158,7 @@ function AddPet() {
           onChange={handleChange}
         />
 
-        <button className="submitBtn">Add Pet</button>
+        <button className="addPetBtn">ADD PET</button>
       </form>
     </div>
   );

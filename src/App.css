@@ -62,7 +62,7 @@ a {
   border-radius: 4px;
   outline: none;
   padding: 20px;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(253, 234, 234);
   text-align: center;
   width: 484px;
   margin: auto;
@@ -123,7 +123,7 @@ a {
   font-size: 20px;
   font-weight: bold;
   border: none;
-  background-color: inherit;
+  background-color: transparent;
   float: right;
   outline-color: #000000;
   cursor: pointer;
@@ -163,62 +163,72 @@ textarea {
   grid-template-columns: 1fr 1fr;
   grid-gap: 20px;
   background-color: #fdfdfd;
+  background-size: cover;
   padding: 10%;
 }
 .petDisplay {
   margin-top: 30vh;
 }
 
-.petPage {
-  margin-top: 6vh;
-  display: grid;
-  grid-template-columns: 300px 300px 300px;
-  grid-gap: 50px;
-  justify-content: center;
-  align-items: center;
-  height: fit-content;
-  background-color: #e5e2e2;
-}
 .petLink {
   color: rgb(219, 152, 152);
 }
 .PetsText {
   justify-content: center;
   display: flex;
-  line-height: 8vh;
-}
-
-.petList {
-  list-style: none;
-  display: contents;
-}
-
-.card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  padding: 16px;
-  text-align: center;
-  background-color: #ffe8e8;
+  padding-top: 5%;
+  font-size: xx-large;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #9c6b4c;
 }
 
 .noPetsText {
   margin-top: 20vh;
 }
-
-.petImgs {
-  object-fit: contain;
-  height: 287px;
-  width: 273px;
-}
+/* 
+.AddPetPageWrapper{
+  display: block;
+  align-items: center;
+  padding-top: 2%;
+  flex-direction: row-reverse;
+  height: 100vh;
+  width: 100vw;
+  background-color: #d8d2d2;
+} */
 
 .AddPetPage {
-  margin-top: 10vh;
+  padding-top: 10vh;
   display: grid;
-  grid-template-columns: 300px 300px 300px;
-  grid-gap: 50px;
+  grid-template-columns: repeat(3, 0fr);
+  grid-gap: 4rem;
   justify-content: center;
   align-items: center;
-  height: fit-content;
-  background-color: #ffe9e9;
+  background-image: linear-gradient(180deg, #f3eded, #f0cfcf);
+padding-right: 5%;
+padding-left: 5%;
+height: 100vh;
+width: 100vw;
+}
+
+.addPetBtn{
+  justify-content: center;
+  width: 268px;
+  height: 48px;
+  border-radius: 6px;
+  border: 2px solid rgb(204, 204, 204);
+  margin: 3px;
+  outline: none;
+  background-color: rgb(189, 189, 189);
+ /* font-weight: bold; */
+ font-size: large;
+ letter-spacing: 0.1em;
+}
+
+.addPetText{
+  letter-spacing: 1rem;
+  font-weight: 300;
+  font-size: x-large;
 }
 
 .searchBar {
@@ -240,4 +250,132 @@ textarea {
   width: auto;
   margin-top: 2vh;
   margin-bottom: 2vh;
+}
+
+.petBio {
+  font-weight: bold;
+  letter-spacing: 0.2em;
+  color: #9c6b4c;
+  line-height: 1.5em;
+  font-size: medium;
+}
+
+.petList {
+  list-style: none;
+  display: contents;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  text-align: center;
+  background-color: #ffe8e8;
+  align-items: center;
+  margin: 4%;
+  height: 590px;
+  padding: 6%;
+  background-image: linear-gradient(124deg, #f8dede, #ddbcbc);
+}
+.petImgs {
+  object-fit: contain;
+  height: 287px;
+  width: 273px;
+}
+.petPage {
+  padding-top: 5%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 50px;
+  justify-content: center;
+  align-items: center;
+  /* height: fit-content;
+  width: fit-content; */
+  background-color: #f1e0e0;
+}
+
+.cardBtnsWrapper {
+  margin-top: 3vh;
+  display: inline-flex;
+  align-items: center;
+}
+
+.btnCard {
+  display: block;
+  border-radius: 100px;
+  width: 90%;
+  background-color: #9c6b4c;
+  color: white;
+  text-transform: uppercase;
+  padding: 3px 14px;
+  border-color: rgb(184, 177, 177);
+}
+
+.petName {
+  font-size: x-large;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #9c6b4c;
+  letter-spacing: 0.5rem;
+  font-style: oblique;
+}
+
+.petInfoWrapper {
+  text-transform: lowercase;
+  color: #5a5a5a;
+  font-weight: 400;
+}
+.petBreed {
+  color: #80573f;
+  text-transform: uppercase;
+  /* letter-spacing: 0.1em; */
+}
+
+.myPetsPage {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 50px;
+  list-style: none;
+  margin-top: 5vh;
+}
+
+.myPetsWrapper {
+  background-color: #f1e0e0;
+}
+
+.mypets {
+  width: 300px;
+  height: fit-content;
+  margin: 10px auto;
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.7);
+  background-color: #d3bbad;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.petImages {
+  width: 100%;
+  height: 400px;
+}
+
+.adoptionText {
+  color: #413935;
+  letter-spacing: 0.1em;
+  text-transform: lowercase;
+  font-weight: 300;
+  margin: 1vh;
+}
+
+.singlePetCard {
+  background-image: linear-gradient(124deg, #f8dede, #ddbcbc);
+  width: 484px;
+}
+
+.adoptFosterSave {
+  padding-left: 20%;
+  font-weight: 500;
+  font-size: 4em;
+  letter-spacing: 0.5em;
+  color: #413935;
 }

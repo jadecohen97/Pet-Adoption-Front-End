@@ -54,9 +54,9 @@ const AppRouter = () => {
             <PrivateRoute path="/AddPet">
               <AddPet />
             </PrivateRoute>
-            <PrivateRoute path="/pet/:id">
+            {/* <PrivateRoute path="/pet/:id">
               <CreatedPet />
-            </PrivateRoute>
+            </PrivateRoute> */}
             <Route path="/PetPage">
               <PetPage />
             </Route>

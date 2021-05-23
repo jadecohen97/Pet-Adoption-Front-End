@@ -32,7 +32,7 @@ const SignUp = ({ isOpen, setIsOpenSign }) => {
     } else {
       try {
         await signUpUser(userInfo);
-        setFailedMessage("");
+        setFailedMessage("Thank you for signing up!");
       } catch (err) {
         setFailedMessage(
           "oops.. we had a problem signing you in. check your credentials"

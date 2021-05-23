@@ -20,7 +20,6 @@ const PetPage = () => {
   const [isSaved, setIsSaved] = useState("");
   const [isUnsaved, setIsUnsaved] = useState("");
   const [pets, setPets] = useState([]);
-  const [userId, setUserId] = useState("");
 
   const [user, setUser] = useState("");
   const [petsSaved, setPetsSaved] = useState([]);
@@ -71,14 +70,14 @@ const PetPage = () => {
     document.getElementById(`${petId}-unsave`).remove("disabled");
 
     setIsSaved({ value: petId });
-    await savePets(petId, isSaved, authToken).then((data) => {
-      setUserId(data.userId);
-    });
+    await savePets(petId, isSaved, authToken);
   };
 
   const handleUnsavePet = async (event) => {
     const petId = event.target.value;
-    document.getElementById(`${petId}-unsave`).setAttribute("disabled", "true");
+    document
+      .getElementById(`${petId}-unsave`)
+      .setAttribute("disabled", "divue");
     document.getElementById(`${petId}-save`).removeAttribute("disabled");
 
     setIsUnsaved({ value: petId });
@@ -95,7 +94,7 @@ const PetPage = () => {
       );
     } else {
       return (
-        <button value={pets.id} onClick={handleSavePet}>
+        <button className="btnCard" value={pets.id} onClick={handleSavePet}>
           save
         </button>
       );
@@ -105,72 +104,96 @@ const PetPage = () => {
   return (
     <div className="petPage">
       <ul className="petList">
-        <h4>
+        <div className="adoptFosterSave">
           ADOPT <br /> <br /> <br /> FOSTER <br /> <br /> <br /> SAVE <br />{" "}
-        </h4>
+        </div>
         {pets.map((pet) => (
           <li key={pet.id}>
             <div className="card">
-              <div>{pet.name}</div>
-              <div>{pet.type}</div>
-              <div>{pet.breed}</div>
-              <div>{pet.adoption_Status}</div>
-                <img className="petImgs" src={pet.picture_url}></img>
-              <div>Height: {pet.height}</div>
-              <div>Weight: {pet.weight}</div>
-              <div>{pet.color}</div>
-              <div>{pet.bio}</div>
-              <div>
-                hypoallergenic? {pet.hypoallergenic === 0 ? "yes" : "no"}
+              <div className="petName">{pet.name}</div>
+              <div className="petBreed">
+                <div>{pet.breed}</div>
+                <div>{pet.adoption_Status}</div>
               </div>
-              <div>Dietary Restrictions? {pet.dietary_restrictions}</div>
-              {auth.token && (
+              <img className="petImgs" src={pet.picture_url}></img>
+
+              <div className="petBio">
+                About {pet.name} <br />
+                {pet.bio}
+              </div>
+              <br />
+              <div className="petInfoWrapper">
+                <div>Height: {pet.height}</div>
+                <div>Weight: {pet.weight}kg</div>
+                <div>Color: {pet.color}</div>
                 <div>
-                  {(pet.adoption_Status === "Available" ||
-                    pet.fosteredBy === user) && (
-                    <button value={pet.id} onClick={handleIsAdopted}>
-                      adopt
-                    </button>
-                  )}
+                  hypoallergenic? {pet.hypoallergenic === 0 ? "yes" : "no"}
                 </div>
-              )}
-              {auth.token && (
-                <div>
-                  {pet.adoption_Status !== "Fostered" &&
-                    pet.adoption_Status === "Available" && (
-                      <button value={pet.id} onClick={handleIsFostered}>
-                        foster
+                <div>Dietary Restrictions? {pet.dietary_restrictions}</div>
+              </div>
+              <div className="cardBtnsWrapper">
+                {auth.token && (
+                  <div>
+                    {(pet.adoption_Status === "Available" ||
+                      pet.fosteredBy === user) && (
+                      <button
+                        className="btnCard"
+                        value={pet.id}
+                        onClick={handleIsAdopted}
+                      >
+                        adopt
                       </button>
                     )}
-                </div>
-              )}
-              {auth.token && (
-                <div>
-                  {(pet.adoptedBy === user || pet.fosteredBy === user) && (
-                    <button value={pet.id} onClick={handleReturnPet}>
-                      return
+                  </div>
+                )}
+                {auth.token && (
+                  <div>
+                    {pet.adoption_Status !== "Fostered" &&
+                      pet.adoption_Status === "Available" && (
+                        <button
+                          className="btnCard"
+                          value={pet.id}
+                          onClick={handleIsFostered}
+                        >
+                          foster
+                        </button>
+                      )}
+                  </div>
+                )}
+                {auth.token && (
+                  <div>
+                    {(pet.adoptedBy === user || pet.fosteredBy === user) && (
+                      <button
+                        className="btnCard"
+                        value={pet.id}
+                        onClick={handleReturnPet}
+                      >
+                        return
+                      </button>
+                    )}
+                  </div>
+                )}
+                {authToken && (
+                  <span className="btnCard">
+                    <button
+                      // className="btnCard"
+                      id={`${pet.id}-unsave`}
+                      value={pet.id}
+                      onClick={handleUnsavePet}
+                    >
+                      Unsave
                     </button>
-                  )}
-                </div>
-              )}
-              {authToken && (
-                <span>
-                  <button
-                    id={`${pet.id}-unsave`}
-                    value={pet.id}
-                    onClick={handleUnsavePet}
-                  >
-                    Unsave
-                  </button>
-                  <button
-                    id={`${pet.id}-save`}
-                    value={pet.id}
-                    onClick={handleSavePet}
-                  >
-                    save
-                  </button>
-                </span>
-              )}
+                    <button
+                      // className="btnCard"
+                      id={`${pet.id}-save`}
+                      value={pet.id}
+                      onClick={handleSavePet}
+                    >
+                      save
+                    </button>
+                  </span>
+                )}
+              </div>
             </div>
           </li>
         ))}

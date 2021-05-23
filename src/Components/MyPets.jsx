@@ -6,13 +6,13 @@ import { useParams } from "react-router-dom";
 import CreatedPet from "./CreatedPet";
 import localforage from "localforage";
 
-Modal.setAppElement("body");
+// Modal.setAppElement("body");
 
 const MyPets = () => {
   const auth = useAuth();
-  const onOpenModal = () => setIsOpen(true);
-  const onCloseModal = () => setIsOpen(false);
-  const [modalIsOpen, setIsOpen] = useState(false);
+  // const onOpenModalPet = () => setIsOpenPet(true);
+  const onCloseModalPet = () => setIsOpenPet(false);
+  const [modalIsOpenPet, setIsOpenPet] = useState(false);
   const [myPets, setMyPets] = useState([]);
   const [showThisPet, setShowThisPet] = useState("");
   const [mySavedPets, setMySavedPets] = useState([]);
@@ -42,52 +42,48 @@ const MyPets = () => {
   const viewPet = (event) => {
     const targetPetId = event.target.value;
     setShowThisPet({ value: targetPetId });
-    onOpenModal();
+    setIsOpenPet(true);
   };
 
   if (myPets.length === 0 && petData.length === 0) {
     return <p className="noPetsText"> You Do not own / foster any pets </p>;
   }
   return (
-    <div>
-      <div className="petPage">
-        <ul className="petList">
-          <h3 className="PetsText">VIEW YOUR PETS</h3>
-          {myPets.map((myPets) => (
-            <li key={myPets.id}>
-              <div className="card">
-                <div>{myPets.name}</div>
-                <div>{myPets.adoption_Status}</div>
-                <div>
-                  <img className="petImgs" src={myPets.picture_url}></img>
-                </div>
-                <button
-                  className="submitBtn"
-                  value={myPets.id}
-                  onClick={viewPet}
-                >
-                  see more info
-                </button>
-                <Modal isOpen={modalIsOpen} className="modal">
-                  <button className="closeModal" onClick={onCloseModal}>
-                    x
-                  </button>
-                  <CreatedPet targetPetId={showThisPet.value} />
-                </Modal>
+    <div className="myPetsWrapper">
+      <div className="PetsText">VIEW YOUR PETS</div>
+      <ul className="myPetsPage">
+        {myPets.map((myPets) => (
+          <li key={myPets.id}>
+            <div className="mypets">
+              <div className="petName">{myPets.name}</div>
+              <div className="adoptionText">{myPets.adoption_Status}</div>
+              <div>
+                <img className="petImages" src={myPets.picture_url}></img>
               </div>
-            </li>
-          ))}
-        </ul>
-      </div>
+              <button className="submitBtn" value={myPets.id} onClick={viewPet}>
+                see more info
+              </button>
+              
+            </div>
+          </li>
+        ))}
+        <Modal isOpen={modalIsOpenPet} className="modal">
+                <button className="closeModal" onClick={onCloseModalPet}>
+                  x
+                </button>
+                <CreatedPet targetPetId={showThisPet.value} />
+              </Modal>
+      </ul>
+      <div className="PetsText">YOUR SAVED PETS</div>
       <div>
-        <ul className="petList">
-          <h3 className="PetsText">YOUR SAVED PETS</h3>
+        <ul className="myPetsPage">
           {petData.map((petData) => (
-            <li className="list" key={petData[0].id}>
-              <div className="card">
-                <div>{petData[0].adoption_Status}</div>
+            <li className="petList" key={petData[0].id}>
+              <div className="mypets">
+                <div className="petName">{petData[0].name}</div>
+                <div className="adoptionText">{petData[0].adoption_Status}</div>
                 <div>
-                  <img className="petImgs" src={petData[0].picture_url}></img>
+                  <img className="petImages" src={petData[0].picture_url}></img>
                 </div>
                 <button
                   className="submitBtn"
@@ -96,15 +92,19 @@ const MyPets = () => {
                 >
                   see more info
                 </button>
-                <Modal isOpen={modalIsOpen} className="modal">
-                  <button className="closeModal" onClick={onCloseModal}>
-                    x
-                  </button>
-                  <CreatedPet targetPetId={showThisPet.value} />
-                </Modal>
               </div>
             </li>
           ))}
+           <Modal
+                 isOpen={modalIsOpenPet}
+                 className="modal"
+                 targetPetId={showThisPet.value}
+               >
+                 <button className="closeModal" onClick={onCloseModalPet}>
+                   x
+                 </button>
+                 <CreatedPet targetPetId={showThisPet.value} />
+               </Modal>
         </ul>
       </div>
     </div>

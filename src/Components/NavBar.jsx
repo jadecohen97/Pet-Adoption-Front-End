@@ -24,12 +24,10 @@ const NavBar = () => {
   useEffect(() => {
     const first = localforage.getItem("Name").then((name) => {
       setFirstName(name);
-      console.log("first", name);
     });
     const last = localforage
       .getItem("LastName")
       .then((name) => setLastName(name));
-    console.log(first, last);
   }, []);
 
   const setName = (userNames) => {
@@ -45,13 +43,14 @@ const NavBar = () => {
     const removeName = localforage.removeItem("Name").then((name) => {
       setFirstName("");
     });
-    const removeLastNight = localforage.removeItem("LastName").then((lastName) => {
-      setLastName("");
-    });
+    const removeLastName = localforage
+      .removeItem("LastName")
+      .then((lastName) => {
+        setLastName("");
+      });
   };
 
   return (
-    <div>
       <div className="NavBar">
         <strong>
           <Link to="/">
@@ -80,16 +79,15 @@ const NavBar = () => {
           ) : (
             <span>
               <button className="navBtns" onClick={onOpenModal}>
-                LOGIN 
+                LOGIN
               </button>
-                  |
+              |
               <button className="navBtns" onClick={onOpenModalSign}>
                 SIGNUP
               </button>
             </span>
           )}
         </div>
-      </div>
       <Login
         isOpen={modalIsOpen}
         setModalIsOpen={setModalIsOpen}
