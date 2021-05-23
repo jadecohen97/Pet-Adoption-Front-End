@@ -20,7 +20,6 @@ const PetPage = () => {
   const [isSaved, setIsSaved] = useState("");
   const [isUnsaved, setIsUnsaved] = useState("");
   const [pets, setPets] = useState([]);
-
   const [user, setUser] = useState("");
   const [petsSaved, setPetsSaved] = useState([]);
   const authToken = auth.token.data ? auth.token.data.token : auth.token;
@@ -67,7 +66,7 @@ const PetPage = () => {
   const handleSavePet = async (event) => {
     const petId = event.target.value;
     document.getElementById(`${petId}-save`).setAttribute("disabled", "true");
-    document.getElementById(`${petId}-unsave`).remove("disabled");
+    document.getElementById(`${petId}-unsave`).removeAttribute("disabled");
 
     setIsSaved({ value: petId });
     await savePets(petId, isSaved, authToken);
@@ -75,9 +74,7 @@ const PetPage = () => {
 
   const handleUnsavePet = async (event) => {
     const petId = event.target.value;
-    document
-      .getElementById(`${petId}-unsave`)
-      .setAttribute("disabled", "divue");
+    document.getElementById(`${petId}-unsave`).setAttribute("disabled", "true");
     document.getElementById(`${petId}-save`).removeAttribute("disabled");
 
     setIsUnsaved({ value: petId });
@@ -108,8 +105,8 @@ const PetPage = () => {
           ADOPT <br /> <br /> <br /> FOSTER <br /> <br /> <br /> SAVE <br />{" "}
         </div>
         {pets.map((pet) => (
-          <li key={pet.id}>
-            <div className="card">
+          <li className="card" key={pet.id}>
+            
               <div className="petName">{pet.name}</div>
               <div className="petBreed">
                 <div>{pet.breed}</div>
@@ -194,7 +191,7 @@ const PetPage = () => {
                   </span>
                 )}
               </div>
-            </div>
+           
           </li>
         ))}
       </ul>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { getPetType} from "../Lib/api";
+import { getPetType } from "../Lib/api";
 import { useAuth } from "../context/auth";
 import CreatedPet from "./CreatedPet";
 import PetPage from "./PetPage";
@@ -24,7 +24,7 @@ const Search = () => {
     );
   }
   return (
-    <div>
+    <div className="searchPageWrapper" >
       <form className="searchPage" onSubmit={(e) => e.preventDefault()}>
         <input
           className="searchBar"
@@ -32,11 +32,11 @@ const Search = () => {
           placeholder="Search"
           onChange={handleChange}
         />
-        <button className="searchBtn" onClick={searchPetType}>
+        <button className="addPetBtn" onClick={searchPetType}>
           Search pet type
         </button>
       </form>
-      <div className="petPage">
+      <div className="petPage searchPage">
         {searchPet.map((pet) => {
           return <CreatedPet key={pet.id} targetPetId={pet.id} />;
         })}

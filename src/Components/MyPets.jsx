@@ -63,17 +63,16 @@ const MyPets = () => {
               <button className="submitBtn" value={myPets.id} onClick={viewPet}>
                 see more info
               </button>
-              
             </div>
           </li>
         ))}
-        <Modal isOpen={modalIsOpenPet} className="modal">
-                <button className="closeModal" onClick={onCloseModalPet}>
-                  x
-                </button>
-                <CreatedPet targetPetId={showThisPet.value} />
-              </Modal>
       </ul>
+      <Modal isOpen={modalIsOpenPet} className="modal">
+        <button className="closeModal" onClick={onCloseModalPet}>
+          x
+        </button>
+        <CreatedPet targetPetId={showThisPet.value} />
+      </Modal>
       <div className="PetsText">YOUR SAVED PETS</div>
       <div>
         <ul className="myPetsPage">
@@ -95,16 +94,6 @@ const MyPets = () => {
               </div>
             </li>
           ))}
-           <Modal
-                 isOpen={modalIsOpenPet}
-                 className="modal"
-                 targetPetId={showThisPet.value}
-               >
-                 <button className="closeModal" onClick={onCloseModalPet}>
-                   x
-                 </button>
-                 <CreatedPet targetPetId={showThisPet.value} />
-               </Modal>
         </ul>
       </div>
     </div>

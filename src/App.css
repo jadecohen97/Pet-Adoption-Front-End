@@ -136,7 +136,8 @@ a {
 }
 
 input[type]:focus,
-textarea[type]:focus {
+textarea[type]:focus,
+input[search]:focus {
   background-color: #fcececf1;
   text-indent: 10px;
 }
@@ -186,16 +187,6 @@ textarea {
 .noPetsText {
   margin-top: 20vh;
 }
-/* 
-.AddPetPageWrapper{
-  display: block;
-  align-items: center;
-  padding-top: 2%;
-  flex-direction: row-reverse;
-  height: 100vh;
-  width: 100vw;
-  background-color: #d8d2d2;
-} */
 
 .AddPetPage {
   padding-top: 10vh;
@@ -205,13 +196,13 @@ textarea {
   justify-content: center;
   align-items: center;
   background-image: linear-gradient(180deg, #f3eded, #f0cfcf);
-padding-right: 5%;
-padding-left: 5%;
-height: 100vh;
-width: 100vw;
+  padding-right: 5%;
+  padding-left: 5%;
+  height: 100vh;
+  width: 100vw;
 }
 
-.addPetBtn{
+.addPetBtn {
   justify-content: center;
   width: 268px;
   height: 48px;
@@ -220,12 +211,11 @@ width: 100vw;
   margin: 3px;
   outline: none;
   background-color: rgb(189, 189, 189);
- /* font-weight: bold; */
- font-size: large;
- letter-spacing: 0.1em;
+  font-size: large;
+  letter-spacing: 0.1em;
 }
 
-.addPetText{
+.addPetText {
   letter-spacing: 1rem;
   font-weight: 300;
   font-size: x-large;
@@ -236,16 +226,23 @@ width: 100vw;
   align-items: center;
   height: 50px;
   margin-top: 12vh;
+  outline: none;
 }
+
 .searchPage {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: #d8d2d2;
   align-content: center;
   display: flex;
-}
+  text-align: center;
 
+
+}
+.searchPageWrapper{
+  height: 100vh;
+  background-color: #f1e0e0;
+}
 .searchBtn {
   width: auto;
   margin-top: 2vh;
@@ -266,15 +263,12 @@ width: 100vw;
 }
 
 .card {
-  display: flex;
-  flex-direction: column;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   text-align: center;
   background-color: #ffe8e8;
   align-items: center;
-  margin: 4%;
-  height: 590px;
-  padding: 6%;
+  height: 600px;
+  padding: 3%;
   background-image: linear-gradient(124deg, #f8dede, #ddbcbc);
 }
 .petImgs {
@@ -283,19 +277,17 @@ width: 100vw;
   width: 273px;
 }
 .petPage {
-  padding-top: 5%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 50px;
   justify-content: center;
   align-items: center;
-  /* height: fit-content;
-  width: fit-content; */
+  padding: 6% 3% 1% 3%;
   background-color: #f1e0e0;
 }
 
 .cardBtnsWrapper {
-  margin-top: 3vh;
+  padding-top: 3vh;
   display: inline-flex;
   align-items: center;
 }
@@ -328,7 +320,7 @@ width: 100vw;
 .petBreed {
   color: #80573f;
   text-transform: uppercase;
-  /* letter-spacing: 0.1em; */
+  
 }
 
 .myPetsPage {
@@ -370,12 +362,14 @@ width: 100vw;
 .singlePetCard {
   background-image: linear-gradient(124deg, #f8dede, #ddbcbc);
   width: 484px;
+  justify-content: center;
+  align-items: center;
 }
 
 .adoptFosterSave {
   padding-left: 20%;
   font-weight: 500;
-  font-size: 4em;
+  font-size: 2em;
   letter-spacing: 0.5em;
   color: #413935;
 }
